@@ -51,6 +51,14 @@ docker run -it -p 8080:8080 api_avec_from
 
 Notez que la commande ci-dessus lie le port 8080 de l'hôte au port 8080 du conteneur.
 
+Pour exécuter l'API sur un port différent, par exemple 7878, vous pouvez le spécifier avec la variable d'environnement PING_LISTEN_PORT et le mapper avec le port du conteneur : 
+
+```bash
+docker run -e PING_LISTEN_PORT=7878 -it -p 7878:7878 api_sans_from
+```
+
+Notez que la commande ci-dessus lie le port 7878 de l'hôte au port 7878 du conteneur.
+
 ## Utilisation
 
 Une fois le conteneur en cours d'exécution, vous pouvez accéder à l'API via `http://localhost:8080/ping`.
