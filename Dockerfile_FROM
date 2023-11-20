@@ -1,0 +1,24 @@
+FROM node:20.9.0 AS build
+
+WORKDIR /app
+
+COPY package.json .
+COPY package-lock.json .
+copy tsconfig.json .
+WORKDIR /app/src/
+COPY /src/ .
+RUN npm install
+
+WORKDIR /app
+
+RUN npx tsc
+
+FROM node:slim
+RUN useradd -r usertest
+
+WORKDIR /app
+
+RUN chown usertest /app
+USER usertest
+COPY --from=build /app /app
+CMD node build/index.js
